@@ -20,13 +20,13 @@ from utils import (
 
 
 class LLM(nn.Module):
-    def __init__(self, params, verbose=False) -> None:
+    def __init__(self, params, verbose=False, token=None) -> None:
         super().__init__()
         self.params = params
         self.verbose = verbose
 
         self.model, self.tokenizer, self.embedding_matrix = llm_loader(
-            llm_params=params.llm_params, verbose=verbose
+            llm_params=params.llm_params, verbose=verbose, token=token
         )
 
         if self.tokenizer.pad_token is None:

@@ -21,7 +21,7 @@ from torchrl.data.replay_buffers.samplers import PrioritizedSampler
 from tqdm import tqdm
 from collections import defaultdict
 
-import wandb
+#import wandb
 from llm import LLM
 from sequence import MergedSeq, Seq, collate_fn
 import warnings
@@ -52,18 +52,21 @@ class Workspace:
         if self.enable_wandb:
             self.init_wandb()
 
+        with open(cfg.access_token_file) as f:
+            token = f.read().strip()
         tqdm.write("Initializing Prompter...")
-        self.prompter = LLM(cfg.prompter, verbose=self.verbose)
+        self.prompter = LLM(cfg.prompter, verbose=self.verbose, token=token)
         tqdm.write("Initializing TargetLLM...")
-        self.target_llm = LLM(cfg.target_llm, verbose=self.verbose)
+        self.target_llm = LLM(cfg.target_llm, verbose=self.verbose, token=token)
 
         self.test_prefixes = read_csv_file(self.cfg.data.test_prefixes_pth)
         self.affirmative_prefixes = read_csv_file(
             self.cfg.data.affirmative_prefixes_pth
         )
 
-        self.train_table = wandb.Table(columns=column_names)
-        self.eval_table = wandb.Table(columns=column_names)
+        if self.enable_wandb:
+            self.train_table = wandb.Table(columns=column_names)
+            self.eval_table = wandb.Table(columns=column_names)
 
     @torch.no_grad()
     def init_wandb(self):

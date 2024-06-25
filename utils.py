@@ -8,7 +8,7 @@ import json
 from functools import wraps
 from tqdm import tqdm
 
-import wandb
+#import wandb
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -432,7 +432,7 @@ def read_csv_file(filename):
     return entries
 
 
-def llm_loader(llm_params, verbose=False):
+def llm_loader(llm_params, verbose=False, token=None):
     tqdm.write(
         f" Loading model: {llm_params.model_name} from {llm_params.checkpoint}...",
     )
@@ -447,9 +447,10 @@ def llm_loader(llm_params, verbose=False):
         tokenizer = AutoTokenizer.from_pretrained(
             llm_params.checkpoint,
             padding_side="right",
+            token=token,
         )
         model = AutoModelForCausalLM.from_pretrained(
-            llm_params.checkpoint, torch_dtype=dtype
+            llm_params.checkpoint, torch_dtype=dtype, token=token
         ).to(llm_params.device)
     else:
         use_fast = "pythia" in llm_params.checkpoint
@@ -459,12 +460,14 @@ def llm_loader(llm_params, verbose=False):
             padding_side="right",
             use_fast=use_fast,
             legacy=False,
+            token=token,
         )
         model = AutoModelForCausalLM.from_pretrained(
             llm_params.checkpoint,
             low_cpu_mem_usage=True,
             torch_dtype=dtype,
             device_map=llm_params.device,
+            token=token,
         )
     mem_after = get_total_allocated_memory()
 
