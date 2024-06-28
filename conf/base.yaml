@@ -15,8 +15,8 @@ data:
   affirmative_prefixes_pth: "${data.data_dir}/affirmative_prefixes.csv"
 
 wandb_params:
-  entity: "zzz"
-  project: "zzz"
+  entity: "aigs-ca"
+  project: "test"
   log_sequences_every: 
     train: 1000
     eval: 1000
