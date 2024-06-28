@@ -67,6 +67,9 @@ class Workspace:
         if self.enable_wandb:
             self.train_table = wandb.Table(columns=column_names)
             self.eval_table = wandb.Table(columns=column_names)
+        else:
+            self.train_table = None
+            self.eval_table = None
 
     @torch.no_grad()
     def init_wandb(self):
