@@ -1,5 +1,5 @@
 llm_params:
-  device: 'cuda'
+  device: 'cuda:1'
   freeze: false
   dtype: float32
 allow_non_ascii: false

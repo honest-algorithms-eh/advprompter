@@ -8,7 +8,7 @@ import math
 import torch
 from tqdm import tqdm
 
-#import wandb
+import wandb
 from utils import (
     add_dummy_dim_to_slice,
     dotdict,

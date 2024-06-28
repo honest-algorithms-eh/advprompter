@@ -8,7 +8,7 @@ import json
 from functools import wraps
 from tqdm import tqdm
 
-#import wandb
+import wandb
 import numpy as np
 import torch
 import torch.nn.functional as F

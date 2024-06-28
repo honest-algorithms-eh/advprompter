@@ -21,7 +21,7 @@ from torchrl.data.replay_buffers.samplers import PrioritizedSampler
 from tqdm import tqdm
 from collections import defaultdict
 
-#import wandb
+import wandb
 from llm import LLM
 from sequence import MergedSeq, Seq, collate_fn
 import warnings
