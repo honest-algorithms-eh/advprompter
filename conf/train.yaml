@@ -13,7 +13,7 @@ pretrain:
   do_eval_after: true
 
 train:
-  epochs: 1
+  epochs: 3
   batch_size: 8
   dataset_key: foo
   dataset_pth: "${data.data_dir}/harmful_behaviors/dataset/train.csv"

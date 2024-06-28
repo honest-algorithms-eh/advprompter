@@ -8,7 +8,9 @@ outputs/*
 *.pt
 .vscode/*
 core
-exp
+# exp
+# Instead of exp ignoring the checkpoints (the thing that takes the space)
+checkpoints/
 wandb
 slurm
 *.sif
